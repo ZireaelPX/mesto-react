@@ -1,7 +1,5 @@
 function PopupWithForm(props){
-    console.log(props)
     const {name, title, children, btnText, isOpen, onClose} = props;
-    // profile-edit
     return(
         <div className={`popup popup_${name} ${isOpen ? ' popup_opened': ''}`}>
             <div className="popup__container">
