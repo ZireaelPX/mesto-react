@@ -3,11 +3,13 @@ import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import {useState} from "react";
+import ImagePopup from "./ImagePopup";
 
 function App() {
     const [isEditProfilePopupOpen,setIsEditProfilePopupOpen] = useState(false);
     const [isAddPlacePopupOpen,setIsAddPlacePopupOpen] = useState(false);
     const [isEditAvatarPopupOpen,setIsEditAvatarPopupOpen] = useState(false);
+    const [selectedCard,setSelectedCard] = useState(false);
 
     function handleEditAvatarClick(){
         setIsEditAvatarPopupOpen(true);
@@ -18,20 +20,25 @@ function App() {
     function handleAddPlaceClick(){
         setIsAddPlacePopupOpen(true);
     }
+    function handleCardClick(card){
+        setSelectedCard(card);
+    }
     function closeAllPopups(){
         setIsAddPlacePopupOpen(false);
         setIsEditProfilePopupOpen(false);
         setIsEditAvatarPopupOpen(false);
+        setSelectedCard(false);
     }
 
     return (
-        <div className="root">
+        <>
             <div className="root__block">
                 <Header/>
                 <Main
                     onEditProfile={handleEditProfileClick}
                     onAddPlace={handleAddPlaceClick}
                     onEditAvatar={handleEditAvatarClick}
+                    onCardClick={handleCardClick}
                 />
                 <Footer/>
             </div>
@@ -85,7 +92,10 @@ function App() {
                 )}
             />
 
-
+            <ImagePopup
+                card={selectedCard}
+                onClose={closeAllPopups}
+            />
             <div className="popup popup_card-delete">
                 <div className="popup__container">
                     <h2 className="popup__title">Вы уверены?</h2>
@@ -95,21 +105,7 @@ function App() {
                     <button className="popup__close-btn" type="button"></button>
                 </div>
             </div>
-            <template id="card">
-                <li className="place">
-                    <img className="place__image" src="<%=require('./images/dykhtau.jpg')%>" alt=""/>
-                    <div className="place__description">
-                        <h2 className="place__title">
-                        </h2>
-                        <div className="place__like-container">
-                            <button className="place__like-btn" type="button"></button>
-                            <p className="place__like-count">0</p>
-                        </div>
-                    </div>
-                    <button className="place__delete-btn" type="button"></button>
-                </li>
-            </template>
-        </div>
+        </>
     );
 }
 
