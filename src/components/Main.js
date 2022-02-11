@@ -2,8 +2,7 @@ import {useState, useEffect} from "react";
 import api from "../utils/api";
 import Card from "./Card";
 
-function Main(props) {
-    const {onEditProfile, onEditAvatar, onAddPlace, onCardClick} = props;
+function Main({onEditProfile, onEditAvatar, onAddPlace, onCardClick}) {
 
     const [userInfo, setUserInfo] = useState({});
     const [cards, setCards] = useState([]);
@@ -36,13 +35,13 @@ function Main(props) {
             </section>
             <section className="places">
                 <ul className="places__block">
-                    {cards.map((card, id) => (
+                    {cards.map((card) => (
                         <Card
-                            key={id}
+                            key={card._id}
                             card={card}
-                            link={card.link}
-                            name={card.name}
-                            likes={card.likes.length}
+                            // link={card.link}
+                            // name={card.name}
+                            // likes={card.likes.length}
                             onCardClick={onCardClick}
                         />
                     ))}
