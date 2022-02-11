@@ -26,6 +26,22 @@
   - Хуки
 
 
+
+## Установка и запуск приложения:
+
+Клонирование репозитория:
+
+    git clone https://github.com/ZireaelPX/mesto-react.git
+
+Установка зависимостей:
+
+    npm install
+
+Запуск приложение:
+
+    npm run start
+
+
 ## Ссылка на сайт:
 https://zireaelpx.github.io/mesto-react/
 
