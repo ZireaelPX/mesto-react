@@ -31,12 +31,13 @@ class Api {
 
 	updateUserInfo(body) {
 		const url = this.baseUrl + '/users/me ';
+		console.log(body)
 		return fetch(url, {
 			method: 'PATCH',
 			headers: this.headers,
 			body: JSON.stringify({
 				name: body.name,
-				about: body.hobby
+				about: body.about
 			})
 		})
 			.then(this._checkResponse);
