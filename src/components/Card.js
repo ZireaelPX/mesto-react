@@ -1,6 +1,5 @@
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 import {useContext} from "react";
-import loading from '../images/loading.gif';
 
 function Card({card, id, onCardClick, onLikeCard, onCardDelete}) {
     const currentUser = useContext(CurrentUserContext);
@@ -27,7 +26,7 @@ function Card({card, id, onCardClick, onLikeCard, onCardDelete}) {
     }
 
     return (
-        <li className="place" key={id}>
+        <li className="place">
             <img className="place__image" src={card.link} alt={card.name} onClick={handleClick}/>
             <div className="place__description">
                 <h2 className="place__title">

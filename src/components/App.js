@@ -1,7 +1,6 @@
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
-import PopupWithForm from "./PopupWithForm";
 import {useState, useEffect} from "react";
 import ImagePopup from "./ImagePopup";
 
@@ -31,7 +30,6 @@ function App() {
     }), []);
 
     function handleUpdateUser(data) {
-        console.log(data)
         api.updateUserInfo(data)
             .then((newInfoUser) => {
                 setCurrentUser(newInfoUser);
@@ -56,7 +54,6 @@ function App() {
     function handleNewCard(data) {
         api.addNewCard(data)
             .then((res) => {
-                console.log(res)
                 setCards([res, ...cards,]);
                 closeAllPopups();
             })
@@ -69,18 +66,25 @@ function App() {
         const isLiked = card.likes.some(i => i._id === currentUser._id);
 
         if (!isLiked) {
-            api.addCardLike(card._id).then((newCard) => {
-                setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-            });
+            api.addCardLike(card._id)
+                .then((newCard) => {
+                    setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+                })
+                .catch(err => {
+                    console.error('Ошибка установки лайка: ' + err)
+                })
         } else {
-            api.deleteCardLike(card._id).then((newCard) => {
-                setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-            });
+            api.deleteCardLike(card._id)
+                .then((newCard) => {
+                    setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+                })
+                .catch(err => {
+                    console.error('Ошибка установки лайка: ' + err)
+                })
         }
     }
 
     function handleCardDelete(card) {
-        console.log(card)
         api.deleteCard(card._id)
             .then(() => {
                 setCards((items) => items.filter((c) => c._id !== card._id));

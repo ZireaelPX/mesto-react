@@ -16,9 +16,6 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
             setDescription(currentUser.about);
             setIsLoading(false);
         }
-        // Проверка для исправления ошибки
-        // A component is changing an uncontrolled input to be controlled.
-        // This is likely caused by the value changing from undefined to a defined value, which should not happen.
     }, [isOpen, currentUser]);
 
     function editName(e){
@@ -33,7 +30,6 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
         evt.preventDefault();
 
         setIsLoading(true);
-
         onUpdateUser({name, about: description});
     }
 
