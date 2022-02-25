@@ -1,5 +1,6 @@
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 import {useContext} from "react";
+import loading from '../images/loading.gif';
 
 function Card({card, id, onCardClick, onLikeCard, onCardDelete}) {
     const currentUser = useContext(CurrentUserContext);
@@ -25,7 +26,6 @@ function Card({card, id, onCardClick, onLikeCard, onCardDelete}) {
         onCardDelete(card);
     }
 
-
     return (
         <li className="place" key={id}>
             <img className="place__image" src={card.link} alt={card.name} onClick={handleClick}/>
@@ -37,6 +37,7 @@ function Card({card, id, onCardClick, onLikeCard, onCardDelete}) {
                     <button className={cardLikeButtonClassName} type="button" onClick={handleLikeClick}/>
                     <p className="place__like-count">{card.likes.length}</p>
                 </div>
+
             </div>
             <button className={cardDeleteButtonClassName} type="button" onClick={handleDeleteClick}/>
         </li>

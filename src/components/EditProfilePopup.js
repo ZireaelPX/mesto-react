@@ -6,6 +6,7 @@ import {CurrentUserContext} from "../contexts/CurrentUserContext";
 function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const currentUser = useContext(CurrentUserContext)
 
@@ -13,6 +14,7 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
         if(isOpen){
             setName(currentUser.name);
             setDescription(currentUser.about);
+            setIsLoading(false);
         }
         // Проверка для исправления ошибки
         // A component is changing an uncontrolled input to be controlled.
@@ -29,6 +31,9 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
 
     function handleSubmit(evt){
         evt.preventDefault();
+
+        setIsLoading(true);
+
         onUpdateUser({name, about: description});
     }
 
@@ -39,6 +44,7 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
             isOpen={isOpen}
             onClose={onClose}
             onSubmit={handleSubmit}
+            isLoading={isLoading}
         >
             <input onChange={editName} value={name} type="text" className="popup__input popup__input_value_name" name="name" id="name"
                    placeholder="Имя" required minLength="2" autoComplete="off"/>

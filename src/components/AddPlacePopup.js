@@ -1,10 +1,17 @@
-import {createRef, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 
 import PopupWithForm from "./PopupWithForm";
 
 function EditProfilePopup({isOpen, onClose, onAddNewCard}) {
     const [title, setTitle] = useState('');
     const [link, setLink] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(()=> {
+        setIsLoading(false);
+        setTitle('');
+        setLink('')
+    }, [isOpen]);
 
     function editTitle(e) {
         setTitle(e.target.value);
@@ -16,6 +23,8 @@ function EditProfilePopup({isOpen, onClose, onAddNewCard}) {
 
     function handleSubmit(e) {
         e.preventDefault();
+
+        setIsLoading(true);
         onAddNewCard({
             title,
             link
@@ -30,6 +39,7 @@ function EditProfilePopup({isOpen, onClose, onAddNewCard}) {
             isOpen={isOpen}
             onClose={onClose}
             onSubmit={handleSubmit}
+            isLoading={isLoading}
         >
             <input type="text" className="popup__input popup__input_value_card-name" name="title" id="title"
                    placeholder="Название" required minLength="2" autoComplete="off" value={title} onChange={editTitle}/>
